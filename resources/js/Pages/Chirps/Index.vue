@@ -22,16 +22,25 @@
                 <InputError :message="form.errors.message" class="mt-2" />
                 <PrimaryButton class="mt-4">Chirp</PrimaryButton>
             </form>
+            <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+                <chirp
+                    v-for="chirp in chirps"
+                    :key="chirp.id"
+                    :chirp="chirp"
+                />
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>
 
 <script setup>
+import Chirp from '@/Components/Chirp.vue';
 import { useForm, Head } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
+defineProps(['chirps']);
 const form = useForm({
     message: '',
 });
